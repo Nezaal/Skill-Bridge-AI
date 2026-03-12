@@ -1,59 +1,93 @@
 import React, { useState } from 'react'
-import "./auth.form.scss"
-import { Link } from 'react-router'
+import "./login.scss"
+import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../hooks/useAuth'
 
-
-
 const Login = () => {
-
     const { handleLogin, loading } = useAuth()
+    const navigate = useNavigate()
 
-    const [email , setEmail] = useState("")
-
-    const [password , setPassword] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        await handleLogin({email, password})
-    }
-
-    if(loading){
-        return (
-            <main> <h1>Loading...</h1></main>
-        )
+        e.preventDefault()
+        // Here we handle the login, and wait for it to complete. 
+        // If the hook throws an error, it will bypass navigation.
+        try {
+            await handleLogin({ email, password })
+            navigate("/")
+        } catch (error) {
+            console.error("Login failed", error)
+        }
     }
 
     return (
-        <main>
-            <div className='form-container'>
+        <main className="login-wrapper">
+            {/* Ambient Animated Orbs */}
+            <div className="ambient-orb orb-1"></div>
+            <div className="ambient-orb orb-2"></div>
 
-                <h1>Login</h1>
+            <div className="login-glass-card">
+                
+                <div className="brand-header">
+                    <div className="brand-logo"></div>
+                    <h1>Welcome Back</h1>
+                    <p>Enter your credentials to access your account</p>
+                </div>
 
                 <form onSubmit={handleSubmit}>
                     <div className="input-group">
-                        <label htmlFor="email">Email</label>
-                        <input type="email" id='email'
-                            onChange={(e) => {setEmail(e.target.value)}}
-                            name='email' placeholder='Enter your email' />
+                        <label htmlFor="email">Email Address</label>
+                        <div className="input-wrapper">
+                            <input 
+                                type="email" 
+                                id="email"
+                                name="email" 
+                                placeholder="name@example.com" 
+                                autoComplete="username"
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
                     </div>
+
                     <div className="input-group">
                         <label htmlFor="password">Password</label>
-                        <input type="password" 
-                        onChange={(e) => {setPassword(e.target.value)}}
-                        id='password' name='password' placeholder='Enter your password' />
+                        <div className="input-wrapper">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                placeholder="Enter your password" 
+                                autoComplete="current-password"
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
                     </div>
 
-                    <button
-                        className='button primary-button' type='submit'>Login
+                    <button 
+                        className="btn-submit" 
+                        type="submit"
+                        disabled={loading}
+                    >
+                        {loading ? 'Authenticating...' : 'Sign In'}
                     </button>
 
-                    <p>Don't have an account?
-                        <Link to={'/register'}>Register</Link>
-                    </p>
-
+                    <div className="form-footer">
+                        <p>Don't have an account? <Link to={'/register'}>Register now</Link></p>
+                    </div>
                 </form>
             </div>
+
+            {/* Optional full-screen loading overlay */}
+            {loading && (
+                <div className="loading-overlay">
+                    <div className="spinner"></div>
+                    <p>Authenticating...</p>
+                </div>
+            )}
         </main>
     )
 }
