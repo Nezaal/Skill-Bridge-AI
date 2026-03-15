@@ -1,0 +1,24 @@
+[
+  {
+    reportMetadata: 'Candidate Evaluation Report',
+    candidateDetails: 'Rahul Verma, Delhi Technical University, B.Tech Computer Science (2021-2025)',
+    position: 'Freelance AI Code Evaluator / Developer',
+    evaluationSummary: "The candidate is a strong fit for the Outlier freelance role, meeting the core requirement of being from a Tier-1 institution (Delhi Technical University). He possesses practical experience in JavaScript and Python, which are critical for analyzing AI-generated code. His portfolio project, 'AI Resume Analyzer', demonstrates an existing interest and familiarity with AI/NLP processing, aligning perfectly with the role's responsibilities of assessing AI outputs.",
+    technicalRating: 4.5,
+    tierOneStatus: 'Confirmed (DTU)',
+    skillsAlignment: "The candidate is highly proficient in JavaScript, React, and Python. While Next.js and TypeScript are not explicitly listed in the skills section, his strong foundation in React and JavaScript suggests he can adapt quickly to the 'highly desirable' technologies mentioned in the JD.",
+    pros: [
+      'Tier-1 education background meets the mandatory hiring criteria.',
+      'Practical experience with Full-stack development and REST APIs.',
+      'Relevant project experience using Python and NLP for data extraction.',
+      'Demonstrates high initiative through open-source interest and competitive programming.'
+    ],
+    cons: [
+      'Lacks explicit mention of Next.js and TypeScript on the resume.',
+      'Experience is limited to internships and academic projects (0-1 year bracket).'
+    ],
+    roleResponsibilitiesFit: "The candidate's background in debugging, query optimization during his internship, and building complex APIs prepares him well for ranking AI outputs and debugging code inconsistencies.",
+    recommendation: 'Hire',
+    suggestedHourlyRate: '$20-$25 based on Tier-1 status and project complexity'
+  }
+]
