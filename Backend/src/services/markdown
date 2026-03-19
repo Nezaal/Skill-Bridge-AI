@@ -1,24 +1,108 @@
-[
-  {
-    reportMetadata: 'Candidate Evaluation Report',
-    candidateDetails: 'Rahul Verma, Delhi Technical University, B.Tech Computer Science (2021-2025)',
-    position: 'Freelance AI Code Evaluator / Developer',
-    evaluationSummary: "The candidate is a strong fit for the Outlier freelance role, meeting the core requirement of being from a Tier-1 institution (Delhi Technical University). He possesses practical experience in JavaScript and Python, which are critical for analyzing AI-generated code. His portfolio project, 'AI Resume Analyzer', demonstrates an existing interest and familiarity with AI/NLP processing, aligning perfectly with the role's responsibilities of assessing AI outputs.",
-    technicalRating: 4.5,
-    tierOneStatus: 'Confirmed (DTU)',
-    skillsAlignment: "The candidate is highly proficient in JavaScript, React, and Python. While Next.js and TypeScript are not explicitly listed in the skills section, his strong foundation in React and JavaScript suggests he can adapt quickly to the 'highly desirable' technologies mentioned in the JD.",
-    pros: [
-      'Tier-1 education background meets the mandatory hiring criteria.',
-      'Practical experience with Full-stack development and REST APIs.',
-      'Relevant project experience using Python and NLP for data extraction.',
-      'Demonstrates high initiative through open-source interest and competitive programming.'
-    ],
-    cons: [
-      'Lacks explicit mention of Next.js and TypeScript on the resume.',
-      'Experience is limited to internships and academic projects (0-1 year bracket).'
-    ],
-    roleResponsibilitiesFit: "The candidate's background in debugging, query optimization during his internship, and building complex APIs prepares him well for ranking AI outputs and debugging code inconsistencies.",
-    recommendation: 'Hire',
-    suggestedHourlyRate: '$20-$25 based on Tier-1 status and project complexity'
-  }
-]
+{
+  "technicalQuestions": [
+    {
+      "question": "Explain the difference between 'let', 'const', and 'var' in JavaScript. When would you use each?",
+      "intention": "To assess fundamental JavaScript understanding, including scope, hoisting, and best practices in variable declaration.",
+      "answer": "'var' is function-scoped and hoisted, leading to potential issues. 'let' is block-scoped and allows re-assignment but not re-declaration. 'const' is block-scoped, prevents re-assignment (for primitives) and re-declaration. Use 'const' by default, then 'let' if re-assignment is needed, and 'var' generally not recommended for new code."
+    },
+    {
+      "question": "How do you handle asynchronous operations in JavaScript? Provide an example using modern syntax.",
+      "intention": "To evaluate understanding of asynchronous programming patterns crucial for web development, especially API interactions.",
+      "answer": "Asynchronous operations can be handled using Promises and async/await syntax. Promises represent the eventual completion (or failure) of an async operation, chained with '.then()' and '.catch()'. 'async/await' provides a cleaner, synchronous-like way to write async code, where 'await' pauses execution until a Promise settles. Example: 'async function fetchData() { try { const response = await fetch('api/data'); const data = await response.json(); console.log(data); } catch (error) { console.error('Error fetching data:', error); } }'"
+    },
+    {
+      "question": "Describe the core concepts of React components and how data flows through them (props vs. state).",
+      "intention": "To assess basic React knowledge, understanding of UI building blocks, and data management within a React application.",
+      "answer": "React applications are built using components, which are independent and reusable pieces of UI. 'Props' (short for properties) are used to pass data from a parent component to a child component, making components configurable and reusable. Props are immutable within the child component. 'State' is data managed internally by a component, allowing components to track and respond to user interactions or other events. When state changes, the component re-renders. Data typically flows unidirectionally from parent to child."
+    },
+    {
+      "question": "Imagine you are reviewing an AI-generated code snippet that is supposed to perform a specific task. What is your process for evaluating its correctness, efficiency, and adherence to best practices?",
+      "intention": "To assess critical thinking, debugging skills, and the ability to provide structured feedback, specifically in the context of AI-generated code as required by the job.",
+      "answer": "My process would involve: 1. Understanding the task's requirements. 2. Running the code with test cases to check correctness. 3. Analyzing complexity for efficiency (time/space). 4. Reviewing for readability, maintainability, and common anti-patterns. 5. Checking for security vulnerabilities or edge case handling. 6. Comparing against established coding standards and language-specific best practices. 7. Providing specific, actionable feedback on identified issues and suggesting improvements."  
+    }
+  ],
+  "behaviourQuestions": [
+    {
+      "question": "Tell me about a time you had to learn a new programming language or framework quickly for a project. What was your approach, and what was the outcome?",
+      "intention": "To assess the candidate's learning agility, motivation, and ability to adapt to new technologies, which is crucial given the AI-focused responsibilities.",
+      "answer": "I would use the STAR method. Describe a situation where a new technology was needed (e.g., learning basic React for a project). Explain the task (to build a UI using React). Detail the actions taken (reading official documentation, watching tutorials, building small practice components, seeking help from online communities). Conclude with the positive result (successfully integrated React, gained foundational knowledge, and delivered the project feature)."
+    },
+    {
+      "question": "This role involves providing constructive feedback on AI-generated content. Describe your experience in giving or receiving constructive criticism and how you ensure it's productive.",
+      "intention": "To evaluate communication skills, openness to feedback, and the ability to provide clear, actionable insights, which are central to the job role.",
+      "answer": "I believe constructive criticism is vital for growth. When giving feedback, I focus on specific behaviors or outcomes rather than personal attributes. I aim to explain 'why' something is an issue and suggest potential solutions. When receiving criticism, I listen actively, ask clarifying questions, and reflect on the feedback to understand how I can improve, rather than becoming defensive. The goal is always mutual understanding and improvement."
+    },
+    {
+      "question": "The role requires strong attention to detail in analyzing code and text. Can you provide an example where your meticulousness helped prevent a significant error or improved the quality of a deliverable?",
+      "intention": "To gauge the candidate's attention to detail and commitment to quality, a key trait for debugging and assessing AI outputs.",
+      "answer": "I would recall a project or assignment where a small detail could have led to a bug. For example, during a project where I built a simple API, I meticulously checked all endpoint paths, request/response structures, and error handling messages. This allowed me to catch a subtle typo in a route definition and ensure consistent error responses, preventing potential client-side issues and improving the overall robustness of the API."
+    }
+  ],
+  "skillGaps": [
+    {
+      "skill": "React, Next.js & TypeScript experience (0-1 year)",
+      "severity": "high"
+    },
+    {
+      "skill": "AI Model Interaction & Feedback (analyzing, debugging AI-generated code, providing feedback, fine-tuning)",      
+      "severity": "high"
+    },
+    {
+      "skill": "Proficiency in modern frontend frameworks (beyond basic React)",
+      "severity": "medium"
+    },
+    {
+      "skill": "Tier-1 College/Company experience (as per job description's specific definition)",
+      "severity": "medium"
+    }
+  ],
+  "preparationPlan": [
+    {
+      "day": 1,
+      "focus": "TypeScript & Advanced React Fundamentals",
+      "tasks": [
+        "Complete a comprehensive TypeScript tutorial focusing on types, interfaces, and generics.",
+        "Refactor an existing JavaScript React project component into TypeScript.",
+        "Review and practice advanced React hooks (e.g., useContext, useReducer) and component patterns."
+      ]
+    },
+    {
+      "day": 2,
+      "focus": "Next.js Introduction & Application Building",
+      "tasks": [
+        "Learn Next.js concepts: file-system routing, data fetching methods (getServerSideProps, getStaticProps), and API routes.",
+        "Build a small, full-stack application (e.g., a simple blog or product list) using Next.js, React, and TypeScript.",     
+        "Deploy the Next.js application to a free platform (e.g., Vercel) to understand deployment pipelines."
+      ]
+    },
+    {
+      "day": 3,
+      "focus": "AI/ML Basics & Prompt Engineering",
+      "tasks": [
+        "Read introductory articles or watch videos on foundational AI/ML concepts, especially Large Language Models (LLMs).",   
+        "Study principles of prompt engineering: effective prompt writing, chain-of-thought, few-shot prompting.",
+        "Experiment with a public LLM (e.g., ChatGPT, Gemini) to practice generating specific code snippets and text, then refining prompts."
+      ]
+    },
+    {
+      "day": 4,
+      "focus": "AI Code Analysis & Constructive Feedback Simulation",
+      "tasks": [
+        "Find examples of AI-generated code (e.g., from GitHub Copilot or ChatGPT conversations).",
+        "Practice analyzing these snippets for correctness, efficiency, style, and potential bugs.",
+        "Formulate written constructive feedback for these AI outputs, focusing on clarity, specificity, and actionable suggestions for improvement.",
+        "Simulate ranking AI outputs based on predefined criteria."
+      ]
+    },
+    {
+      "day": 5,
+      "focus": "Communication & Interview Readiness",
+      "tasks": [
+        "Practice articulating technical concepts clearly and concisely, both verbally and in writing.",
+        "Review common behavioral interview questions and prepare STAR-method answers, especially focusing on learning, feedback, and attention to detail.",
+        "Refine written English communication by proofreading and practicing explanations of complex ideas simply.",
+        "Prepare questions to ask the interviewer about the role, team, and company."
+      ]
+    }
+  ]
+}
