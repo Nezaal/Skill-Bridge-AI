@@ -83,7 +83,9 @@ async function generateInterviewReport({ resume, selfDescription, jobDescription
         },
     });
 
-    console.log(JSON.stringify(JSON.parse(response.text), null, 2))
+    const result = JSON.parse(response.text)
+    console.log(JSON.stringify(result, null, 2))
+    return result
 }
 
 module.exports = { generateInterviewReport }
