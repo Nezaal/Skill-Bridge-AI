@@ -7,6 +7,10 @@ const ai = new GoogleGenAI({
 const interviewReportSchema = {
     type: Type.OBJECT,
     properties: {
+        matchScore: {
+            type: Type.INTEGER,
+            description: "the match score between the candidate and the job description"
+        },
         technicalQuestions: {
             type: Type.ARRAY,
             description: "list of technical questions that can be asked in the interview",

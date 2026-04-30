@@ -37,8 +37,8 @@ async function registerUserController(req, res) {
     )
     res.cookie("token", token, {
         httpOnly: true,
-        sameSite: "none",
-        secure: false,   // set to true in production (HTTPS)
+        // sameSite: "none",
+        // secure: process.env.NODE_ENV === "production", 
     })
 
     res.status(201).json({
@@ -79,8 +79,8 @@ async function loginUserController(req, res) {
 
     res.cookie("token", token, {
         httpOnly: true,
-        sameSite: "none",
-        secure: false,   // set to true in production (HTTPS)
+        // sameSite: "none",
+        // secure: process.env.NODE_ENV === "production", 
     })
     res.status(200).json({
         message: "user logged in successfully",
