@@ -1,0 +1,160 @@
+{
+  "_id": {
+    "$oid": "69ca14aa9105d9feb10485a9"
+  },
+  {
+    "matchScore": 75,
+    
+  },
+  "technicalQuestions": [
+    {
+      "question": "How do you handle state management in a complex React application? Could you give an example from your UniSphere project?",
+      "answer": "Discuss different state management approaches (useState, useContext, Redux if applicable, local component state vs. global state). For UniSphere, explain how you managed event data, user registration status, or UI interactions. Highlight the choices made and their rationale.",
+      "intention": "To assess the candidate's understanding of React state management, practical application, and ability to discuss project architecture."
+    },
+    {
+      "question": "Explain the principles of RESTful APIs. How did you ensure smooth data flow and error-handled operations in your UniSphere backend using Express.js and MongoDB?",
+      "answer": "Define REST principles (statelessness, client-server, cacheable, uniform interface). Explain how endpoints were designed, HTTP methods used (GET, POST, PUT, DELETE), and status codes. For error handling, describe middleware used, try-catch blocks, and how specific error messages were returned to the frontend.",
+      "intention": "To evaluate the candidate's knowledge of backend development, API design principles, and practical experience with error handling and data persistence."
+    },
+    {
+      "question": "Given an AI-generated code snippet that produces incorrect or inefficient output, walk me through your debugging process. What steps would you take to identify the inconsistencies and propose improvements?",
+      "answer": "Outline a systematic debugging approach: understanding the expected output vs. actual, identifying the specific inconsistency (e.g., logic error, suboptimal algorithm, syntax), reproducing the issue, isolating the problem area, testing hypotheses, and proposing concrete, efficient solutions (e.g., rewriting a loop, optimizing a data structure, correcting logic). Emphasize clarity and precision in feedback.",
+      "intention": "To gauge the candidate's debugging skills, analytical thinking, and direct applicability to the job role's core task of evaluating AI-generated code."
+    },
+    {
+      "question": "You mention ML basics in your skills. Can you explain a basic machine learning algorithm (e.g., Linear Regression, K-Means) you are familiar with? How would you assess its performance and identify potential areas for improvement?",
+      "answer": "Choose an algorithm and explain its core concept, how it works, and its typical use cases. Discuss relevant performance metrics (e.g., accuracy, precision, recall, F1-score for classification; R-squared, MSE for regression). Explain how to interpret these metrics and common techniques for improvement (e.g., feature engineering, hyperparameter tuning, more data).",
+      "intention": "To evaluate the candidate's foundational ML knowledge and their ability to think critically about model performance, which is crucial for providing feedback on AI models."
+    },
+    {
+      "question": "The job description mentions TypeScript as highly desirable. What are the key advantages of using TypeScript over JavaScript, especially in a collaborative and scalable project?",
+      "answer": "Explain benefits like type safety, improved code readability, better tooling support (autocompletion, refactoring), reduced runtime errors, and enhanced maintainability, especially in larger codebases with multiple developers. Acknowledge if specific hands-on experience is limited but express enthusiasm for learning.",
+      "intention": "To assess the candidate's awareness of TypeScript's benefits and their willingness to learn and adapt to new technologies."
+    }
+  ],
+  "behaviourQuestions": [
+    {
+      "question": "The role requires analyzing AI-generated text/code and providing constructive feedback. Describe a situation where you had to provide detailed, critical feedback on someone else's work. What was your approach, and what was the outcome?",
+      "answer": "Use the STAR method. Describe the Situation (e.g., code review, project feedback), Task (providing critical but helpful feedback), Action (how you prepared, specific points made, tone used, focus on improvement not criticism), and Result (how the feedback was received, positive changes made, lessons learned).",
+      "intention": "To assess the candidate's ability to give constructive criticism, attention to detail, and communication skills, directly relevant to a core job responsibility."
+    },
+    {
+      "question": "The job requires proficiency in modern frameworks like Next.js and TypeScript, which may be new to you. Tell me about a time you had to quickly learn a new technology or framework for a project. How did you approach it?",
+      "answer": "Use the STAR method. Focus on a technology learned independently or under pressure. Detail the steps taken: identifying resources (documentation, tutorials), hands-on practice, breaking down complex concepts, and applying it to a specific problem or project. Emphasize your ability to quickly become productive.",
+      "intention": "To understand the candidate's learning agility, resourcefulness, and adaptability when faced with new technical challenges, particularly relevant for addressing skill gaps."
+    },
+    {
+      "question": "Given the remote and part-time freelance nature of this role, how do you ensure clear and effective communication, especially when explaining complex technical concepts or providing detailed feedback in written English?",
+      "answer": "Discuss strategies for clear written communication: structuring thoughts logically, using precise language, providing examples, anticipating questions, and proofreading. Mention preferred communication tools. Highlight proactive communication, setting expectations, and ensuring understanding in a remote context.",
+      "intention": "To assess the candidate's communication skills, self-management in a remote setting, and attention to detail in written communication, which is crucial for the role."
+    },
+    {
+      "question": "The role involves identifying subtle inconsistencies and ranking AI outputs based on correctness and efficiency. Describe a project or task where meticulous attention to detail was critical for success. What steps did you take to ensure accuracy?",
+      "answer": "Use the STAR method. Choose an example where small errors could have significant consequences (e.g., debugging a complex feature, data validation, API integration). Explain specific actions taken to ensure accuracy: thorough testing, double-checking logic, code reviews, systematic verification, or using debugging tools effectively.",
+      "intention": "To evaluate the candidate's commitment to quality and detail-oriented approach, directly applicable to the analytical nature of the job."
+    },
+    {
+      "question": "Tell me about a challenging bug you encountered in one of your projects (e.g., UniSphere, Todo App). How did you identify the root cause, and what was your problem-solving process to fix it?",
+      "answer": "Use the STAR method. Describe the bug's symptoms, the initial confusion or difficulty, the tools and techniques used to diagnose it (e.g., console logging, debugger, isolating components, checking network requests), and the final resolution. Emphasize the learning gained from the experience.",
+      "intention": "To understand the candidate's practical debugging skills, resilience in facing technical obstacles, and systematic approach to problem-solving."
+    }
+  ],
+  "skillGaps": [
+    {
+      "skill": "Tier-1 college degree or Tier-1 company work experience",
+      "severity": "high"
+    },
+    {
+      "skill": "Direct experience in analyzing AI-generated code/text specifically for debugging, ranking, and providing structured feedback for model training",
+      "severity": "high"
+    },
+    {
+      "skill": "TypeScript proficiency",
+      "severity": "medium"
+    },
+    {
+      "skill": "Next.js experience",
+      "severity": "medium"
+    },
+    {
+      "skill": "Deeper understanding of AI model fine-tuning concepts and prompt engineering specific to improving AI outputs",
+      "severity": "medium"
+    }
+  ],
+  "preparationPlan": [
+    {
+      "day": 1,
+      "focus": "TypeScript Fundamentals & React Integration",
+      "tasks": [
+        "Complete a TypeScript crash course focusing on types, interfaces, and classes.",
+        "Practice converting a small JavaScript React project (e.g., Todo App) into TypeScript.",
+        "Read official documentation on using TypeScript with React components and hooks."
+      ]
+    },
+    {
+      "day": 2,
+      "focus": "Next.js Basics & Core Concepts",
+      "tasks": [
+        "Set up a basic Next.js application and understand its file-based routing.",
+        "Explore server-side rendering (SSR) and static site generation (SSG) in Next.js.",
+        "Implement basic data fetching (getServerSideProps, getStaticProps) in a Next.js page."
+      ]
+    },
+    {
+      "day": 3,
+      "focus": "AI Output Analysis & Feedback Mechanisms",
+      "tasks": [
+        "Research common patterns of errors/inefficiencies in AI-generated code snippets.",
+        "Practice analyzing short code examples (both human and mock AI-generated) to identify logical flaws, performance bottlenecks, or security issues.",
+        "Draft structured feedback for identified issues, focusing on clarity, specificity, and actionable suggestions."
+      ]
+    },
+    {
+      "day": 4,
+      "focus": "Prompt Engineering & AI Model Improvement Concepts",
+      "tasks": [
+        "Study principles of effective prompt engineering for large language models (LLMs) for code generation.",
+        "Understand high-level concepts of Reinforcement Learning with Human Feedback (RLHF).",
+        "Research how human feedback is typically used to fine-tune and improve AI models."
+      ]
+    },
+    {
+      "day": 5,
+      "focus": "React & Full-Stack Review, System Design",
+      "tasks": [
+        "Review advanced React hooks (useReducer, useCallback, useMemo) and Context API.",
+        "Brush up on Node.js/Express.js best practices, middleware, and database interactions (MongoDB).",
+        "Practice a simple system design problem for a scalable web application, focusing on components and data flow."
+      ]
+    },
+    {
+      "day": 6,
+      "focus": "Python & ML Basics Reinforcement",
+      "tasks": [
+        "Revisit core Python data structures and algorithms, focusing on efficiency.",
+        "Review basic ML concepts: data preprocessing (NumPy, Pandas), model selection, training, and evaluation metrics (Scikit-learn).",
+        "Work through a small ML project or challenge to reinforce practical application and debugging."
+      ]
+    },
+    {
+      "day": 7,
+      "focus": "Mock Interview & Communication Practice",
+      "tasks": [
+        "Conduct a mock interview covering both technical and behavioral questions.",
+        "Practice articulating complex technical concepts concisely and clearly, especially explaining debugging steps or AI feedback.",
+        "Refine answers to behavioral questions using the STAR method, focusing on examples relevant to the job role."
+      ]
+    }
+  ],
+  "user": {
+    "$oid": "69a8141f7557fe0de1866d01"
+  },
+  "createdAt": {
+    "$date": "2026-03-30T06:14:02.620Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-30T06:14:02.620Z"
+  },
+  "__v": 0
+}
