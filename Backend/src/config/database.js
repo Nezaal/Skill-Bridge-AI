@@ -2,11 +2,11 @@ const mongoose = require("mongoose")
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
-IF(!MONGODB_URI){
+if(!MONGODB_URI){
     throw new Error('pleas define the mongodb uri')
 }
 
-let cached = global.mongoose;
+const cached = global.mongoose;
 
 if (!cached) {
     cached = global.mongoose = { conn: null, Promise: null };
