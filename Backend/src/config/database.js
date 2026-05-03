@@ -6,7 +6,7 @@ if(!MONGODB_URI){
     throw new Error('pleas define the mongodb uri')
 }
 
-const cached = global.mongoose;
+let cached = global.mongoose;
 
 if (!cached) {
     cached = global.mongoose = { conn: null, Promise: null };
