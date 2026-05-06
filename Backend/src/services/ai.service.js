@@ -71,7 +71,7 @@ const interviewReportSchema = {
             description : "title of the interview"
         }
     },
-    required: ["technicalQuestions", "behaviourQuestions", "skillGaps", "preparationPlan"]
+    required: ["title", "technicalQuestions", "behaviourQuestions", "skillGaps", "preparationPlan"]
 };
 
 async function generateInterviewReport({ resume, selfDescription, jobDescription }) {
@@ -83,7 +83,7 @@ async function generateInterviewReport({ resume, selfDescription, jobDescription
     `
 
     const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-1.5-flash",
         contents: prompt,
         config: {
             responseMimeType: "application/json",
@@ -155,7 +155,7 @@ ${jobDescription}
 `
 
     const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-1.5-flash",
         contents: prompt,
         config: {
             responseMimeType: "application/json",

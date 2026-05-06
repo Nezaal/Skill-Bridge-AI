@@ -92,6 +92,7 @@ async function generateInterviewReportController(req, res) {
             resume: resumeText,
             selfDescription,
             jobDescription,
+            title: interviewReportByAi.title || "Software Engineering Interview",
             ...interviewReportByAi
         })
 
@@ -149,7 +150,7 @@ async function getAllInterviewReportsController(req, res){
  
     }).sort({
         createdAt: -1
-    }).select("-resume -jobDescription -selfDescription -_v -updatedAt -techinalQuestions -behaviourQuestions -skillGaps -preparationPlan")
+    }).select("-resume -jobDescription -selfDescription -_v -updatedAt -technicalQuestions -behaviourQuestions -skillGaps -preparationPlan")
 
     return res.status(200).json({
         success: true,
