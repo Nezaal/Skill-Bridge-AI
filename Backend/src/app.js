@@ -10,7 +10,11 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: [
+        "http://localhost:5173", // Vite default local port
+        "https://skill-bridge-ai-production.up.railway.app",
+        "https://skill-bridge-ai-lilac.vercel.app"
+    ],
     credentials: true
 }))
 

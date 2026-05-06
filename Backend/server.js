@@ -9,16 +9,7 @@ connectToDB()
 
 
 
-// Allow requests from your local frontend AND your deployed frontend URL
-app.use(cors({
-    origin: [
-        'http://localhost:5173', // Vite default local port
-        'https://skill-bridge-ai-production.up.railway.app' ,// Add your production frontend URL here when you deploy it
-        // 
-        'https://skill-bridge-ai-lilac.vercel.app'
-    ],
-    credentials: true, 
-}));
+// CORS is handled in src/app.js before the routes
 
 
 // Adding '0.0.0.0' explicitly tells Express to accept connections from outside the container
