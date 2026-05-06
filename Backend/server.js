@@ -13,7 +13,9 @@ connectToDB()
 app.use(cors({
     origin: [
         'http://localhost:5173', // Vite default local port
-        'https://skill-bridge-ai-production.up.railway.app' // Add your production frontend URL here when you deploy it
+        'https://skill-bridge-ai-production.up.railway.app' ,// Add your production frontend URL here when you deploy it
+        // 
+        'https://skill-bridge-ai-lilac.vercel.app'
     ],
     credentials: true, 
 }));
