@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors({
     origin: [
         "http://localhost:5173", // Vite default local port
+        "http://localhost:5000", // Vite default local port
         "https://skill-bridge-ai-production.up.railway.app",
         "https://skill-bridge-ai-lilac.vercel.app"
     ],

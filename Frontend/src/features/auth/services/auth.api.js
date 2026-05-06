@@ -2,55 +2,55 @@ import axios from "axios"
 
 console.log(import.meta.env.VITE_API_BASE_URL)
 const api = axios.create({
-    baseURL: import.meta.env.PROD ? "https://skill-bridge-ai-production.up.railway.app" : "http://localhost:5000",
+    baseURL: import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? "https://skill-bridge-ai-production.up.railway.app" : "http://localhost:5000"),
     withCredentials: true
 })
-export async function register({username , email, password}){
-    
-    try{
+export async function register({ username, email, password }) {
+
+    try {
 
         const response = await api.post("/api/auth/register", {
-            username , email, password
+            username, email, password
         })
         return response.data
 
-    }catch(err){
+    } catch (err) {
         console.error(err)
         throw err
     }
 
 }
 
-export async function login({email, password}){
-    try{
-        const response = await api.post("/api/auth/login",{
+export async function login({ email, password }) {
+    try {
+        const response = await api.post("/api/auth/login", {
             email, password
         })
         return response.data
 
-    }catch(err){
+    } catch (err) {
         console.error(err)
         throw err
     }
 }
 
 
-export async function logout(){
-    try{
-        const response = await  api.get("/api/auth/logout")  
+export async function logout() {
+    try {
+        const response = await api.get("/api/auth/logout")
         return response.data
-    }catch(err){
+    } catch (err) {
         console.error(err)
         throw err
     }
 }
 
-export async function getMe(){
-     
-    try{
+export async function getMe() {
+
+    try {
         const response = await api.get("/api/auth/get-me")
-        return response.data    
-    }catch(err){
+        return response.data
+    } catch (err) {
         console.error(err)
         throw err
     }
