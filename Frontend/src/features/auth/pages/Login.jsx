@@ -3,6 +3,8 @@ import "./login.scss"
 import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../hooks/useAuth'
 
+import Loader from '../../../components/Loader/Loader'
+
 const Login = () => {
     const { handleLogin, loading } = useAuth()
     const navigate = useNavigate()
@@ -84,8 +86,7 @@ const Login = () => {
             {/* Optional full-screen loading overlay */}
             {loading && (
                 <div className="loading-overlay">
-                    <div className="spinner"></div>
-                    <p>Authenticating...</p>
+                    <Loader text="Authenticating..." />
                 </div>
             )}
         </main>

@@ -6,6 +6,8 @@ import { jsPDF } from 'jspdf'
 
 
 
+import Spinner from '../../../components/Loader/Loader'
+
 const TABS = [
   { id: 'technical', label: 'Technical Questions', icon: '⟐' },
   { id: 'behavioral', label: 'Behavioral Questions', icon: '◈' },
@@ -46,7 +48,7 @@ const Interview = () => {
   if (loading || !data) {
     return (
       <main className="interview" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
-        <p style={{ color: '#aaa', fontSize: '1.1rem' }}>Loading report…</p>
+        <Loader text="Loading report..." />
       </main>
     )
   }

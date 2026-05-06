@@ -3,6 +3,8 @@ import { Navigate } from "react-router";
 
 import React from 'react'
 
+import Loader from "../../../components/Loader/Loader";
+
 const Protected = ({children}) => {
 
     const {loading, user} = useAuth()
@@ -10,7 +12,8 @@ const Protected = ({children}) => {
 
     if(loading){
         return(
-            <main><h1>loading...</h1></main>
+            
+           <Loader />
         )
     }
     if(!user){

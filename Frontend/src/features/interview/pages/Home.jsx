@@ -3,6 +3,8 @@ import { useInterview } from '../hooks/useInterview'
 import { useNavigate } from 'react-router'
 
 
+import Loader from '../../../components/Loader/Loader'
+
 const Home = () => {
 
     const { loading, generateReport} = useInterview()
@@ -38,11 +40,7 @@ const Home = () => {
     }
 
     if(loading){
-        return(
-            <main className='loading-screen'>
-                <h1>generating...</h1>
-            </main>
-        )
+        return <Loader text="Generating your personalized interview report..." />
     }
 
   return (

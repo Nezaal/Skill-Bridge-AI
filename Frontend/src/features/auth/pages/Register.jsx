@@ -3,6 +3,8 @@ import "./login.scss"
 import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../hooks/useAuth'
 
+import Loader from '../../../components/Loader/Loader'
+
 const Register = () => {
   const { handleRegister, loading } = useAuth()
   const navigate = useNavigate()
@@ -20,14 +22,6 @@ const Register = () => {
     } catch (error) {
       console.error("Registration failed", error)
     }
-  }
-  if(loading){
-    return (
-      <div className="loading-overlay">
-        <div className="spinner"></div>
-        <p>Creating your account...</p>
-      </div>
-    )
   }
 
   return (
@@ -107,8 +101,7 @@ const Register = () => {
       {/* Optional full-screen loading overlay */}
       {loading && (
         <div className="loading-overlay">
-          <div className="spinner"></div>
-          <p>Creating your account...</p>
+          <Loader text="Creating your account..." />
         </div>
       )}
     </main>
