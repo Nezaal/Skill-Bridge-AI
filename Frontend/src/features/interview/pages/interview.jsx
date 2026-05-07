@@ -6,7 +6,7 @@ import { jsPDF } from 'jspdf'
 
 
 
-import Spinner from '../../../components/Loader/Loader'
+import Loader from '../../../components/Loader/Loader'
 
 const TABS = [
   { id: 'technical', label: 'Technical Questions', icon: '⟐' },
