@@ -8,6 +8,7 @@ const puppeteer = require("puppeteer")
 async function generatePDFFromHTML(htmlContent) {
     let browser = null
 
+
     try {
         browser = await puppeteer.launch({
             headless: true,
@@ -31,6 +32,8 @@ async function generatePDFFromHTML(htmlContent) {
         const pdfBuffer = await page.pdf({
             format: "A4",
             printBackground: true,
+            preferCSSPageSize: true,
+            scale: 0.95,
             margin: {
                 top: "0mm",
                 right: "0mm",

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { GoogleLogin } from '@react-oauth/google';
 import "./login.scss"
 import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../hooks/useAuth'
@@ -6,7 +7,7 @@ import { useAuth } from '../hooks/useAuth'
 import Loader from '../../../components/Loader/Loader'
 
 const Login = () => {
-    const { handleLogin, loading } = useAuth()
+    const { handleLogin, handleGoogleLogin, loading } = useAuth()
     const navigate = useNavigate()
 
     const [email, setEmail] = useState("")
@@ -24,6 +25,15 @@ const Login = () => {
         }
     }
 
+    const handleGoogleSuccess = async (credentialResponse) => {
+        try {
+            await handleGoogleLogin({ credential: credentialResponse.credential })
+            navigate("/")
+        } catch (error) {
+            console.error("Google login failed", error)
+        }
+    }
+
     return (
         <main className="login-wrapper">
             {/* Ambient Animated Orbs */}
@@ -31,7 +41,7 @@ const Login = () => {
             <div className="ambient-orb orb-2"></div>
 
             <div className="login-glass-card">
-                
+
                 <div className="brand-header">
                     <div className="brand-logo"></div>
                     <h1>Welcome Back</h1>
@@ -42,11 +52,11 @@ const Login = () => {
                     <div className="input-group">
                         <label htmlFor="email">Email Address</label>
                         <div className="input-wrapper">
-                            <input 
-                                type="email" 
+                            <input
+                                type="email"
                                 id="email"
-                                name="email" 
-                                placeholder="name@example.com" 
+                                name="email"
+                                placeholder="name@example.com"
                                 autoComplete="username"
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
@@ -57,11 +67,11 @@ const Login = () => {
                     <div className="input-group">
                         <label htmlFor="password">Password</label>
                         <div className="input-wrapper">
-                            <input 
-                                type="password" 
-                                id="password" 
-                                name="password" 
-                                placeholder="Enter your password" 
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
                                 autoComplete="current-password"
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
@@ -69,13 +79,27 @@ const Login = () => {
                         </div>
                     </div>
 
-                    <button 
-                        className="btn-submit" 
+                    <button
+                        className="btn-submit"
                         type="submit"
                         disabled={loading}
                     >
                         {loading ? 'Authenticating...' : 'Sign In'}
                     </button>
+
+                    {/* -------------------------------------------------------------------------------- */}
+                    <div className="divider">
+                        <span>or continue with</span>
+                    </div>
+
+                    <div className="google-btn-wrapper" style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
+                        <GoogleLogin
+                            onSuccess={handleGoogleSuccess}
+                            onError={() => {
+                                console.log('Login Failed');
+                            }}
+                        />
+                    </div>
 
                     <div className="form-footer">
                         <p>Don't have an account? <Link to={'/register'}>Register now</Link></p>

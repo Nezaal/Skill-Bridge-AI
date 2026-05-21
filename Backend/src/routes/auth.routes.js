@@ -26,12 +26,17 @@ authRouter.post("/register",authController.registerUserController   )
 
 authRouter.post("/login", authController.loginUserController)
 
+
 /**
  * @toute GET /API/AUTH/LOGOUT
  * @DESCRIPTION clear token from userr cookie and add the token n blacklist
  * @access Pblic  
  */
 authRouter.get("/logout", authController.logoutUserController)
+
+
+// Add this under your existing login route
+authRouter.post("/google", authController.googleLoginController);
 
 /**
  * @route GET /api/auth/me
