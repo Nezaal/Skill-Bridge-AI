@@ -13,12 +13,18 @@ function createAppToken(user) {
     )
 }
 
-function setAuthCookie(res, token) {
-    res.cookie("token", token, {
+function getAuthCookieOptions() {
+    const isProduction = process.env.NODE_ENV === "production"
+
+    return {
         httpOnly: true,
-        sameSite: "none",
-        secure: process.env.NODE_ENV === "production",
-    })
+        sameSite: isProduction ? "none" : "lax",
+        secure: isProduction,
+    }
+}
+
+function setAuthCookie(res, token) {
+    res.cookie("token", token, getAuthCookieOptions())
 }
 
 function createProviderUsername(name, fallbackEmail, providerId, fallbackPrefix) {
@@ -61,11 +67,7 @@ async function registerUserController(req, res) {
         process.env.JWT_SECRET,
         { expiresIn: "1d" },
     )
-    res.cookie("token", token, {
-        httpOnly: true,
-        sameSite: "none",
-        secure: process.env.NODE_ENV === "production",
-    })
+    setAuthCookie(res, token)
 
     res.status(201).json({
         message: "user registers successfully",
@@ -105,11 +107,7 @@ async function loginUserController(req, res) {
         { expiresIn: "1d" },
     )
 
-    res.cookie("token", token, {
-        httpOnly: true,
-        sameSite: "none",
-        secure: process.env.NODE_ENV === "production",
-    })
+    setAuthCookie(res, token)
     res.status(200).json({
         message: "user logged in successfully",
 
@@ -130,11 +128,7 @@ async function logoutUserController(req, res) {
         })
     }
 
-    res.clearCookie("token", {
-        httpOnly: true,
-        sameSite: "none",
-        secure: process.env.NODE_ENV === "production",
-    })
+    res.clearCookie("token", getAuthCookieOptions())
     res.status(200).json({
         message: "user logged out successfully"
     })
@@ -211,11 +205,7 @@ async function googleLoginController(req, res) {
             { expiresIn: "1d" },
         )
 
-        res.cookie("token", token, {
-            httpOnly: true,
-            sameSite: "none",
-            secure: process.env.NODE_ENV === "production",
-        })
+        setAuthCookie(res, token)
 
         res.status(200).json({
             message: "user logged in successfully",
