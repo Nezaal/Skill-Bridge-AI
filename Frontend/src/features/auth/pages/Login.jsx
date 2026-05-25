@@ -7,7 +7,7 @@ import { useAuth } from '../hooks/useAuth'
 import Loader from '../../../components/Loader/Loader'
 
 const Login = () => {
-    const { handleLogin, handleGoogleLogin, loading } = useAuth()
+    const { handleLogin, handleGoogleLogin, handleGithubLogin, loading } = useAuth()
     const navigate = useNavigate()
 
     const [email, setEmail] = useState("")
@@ -100,6 +100,15 @@ const Login = () => {
                             }}
                         />
                     </div>
+
+                    <button
+                        className="btn-github"
+                        type="button"
+                        onClick={handleGithubLogin}
+                        disabled={loading}
+                    >
+                        Continue with GitHub
+                    </button>
 
                     <div className="form-footer">
                         <p>Don't have an account? <Link to={'/register'}>Register now</Link></p>

@@ -35,16 +35,21 @@ authRouter.post("/login", authController.loginUserController)
 authRouter.get("/logout", authController.logoutUserController)
 
 
-// Add this under your existing login route
-authRouter.post("/google", authController.googleLoginController);
 
 /**
  * @route GET /api/auth/me
  * @description get current logged in user
  * @access Private
- */
+*/
 
 authRouter.get("/get-me", authMiddleware.authUser,authController.getMeController
 )
+// Add this under your existing login route
+authRouter.post("/google", authController.googleLoginController);
+
+
+authRouter.get("/github", authController.githubLoginController)
+
+authRouter.get('/github/callback', authController.githubCallbackController)
 
 module.exports = authRouter

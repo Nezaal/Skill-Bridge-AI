@@ -3,8 +3,32 @@ const blacklistTokenModel = require("../models/blacklist.models")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const { OAuth2Client } = require('google-auth-library');
-
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
+function createAppToken(user) {
+    return jwt.sign(
+        { id: user._id, username: user.username },
+        process.env.JWT_SECRET,
+        { expiresIn: "1d" }
+    )
+}
+
+function setAuthCookie(res, token) {
+    res.cookie("token", token, {
+        httpOnly: true,
+        sameSite: "none",
+        secure: process.env.NODE_ENV === "production",
+    })
+}
+
+function createProviderUsername(name, fallbackEmail, providerId, fallbackPrefix) {
+    const baseUsername = (name || fallbackEmail.split("@")[0])
+        .toLowerCase()
+        .replace(/[^a-z0-9_]/g, "")
+        .slice(0, 24) || fallbackPrefix
+
+    return `${baseUsername}_${String(providerId).slice(-6)}`
+}
 
 async function registerUserController(req, res) {
     const { username, email, password } = req.body
@@ -40,7 +64,7 @@ async function registerUserController(req, res) {
     res.cookie("token", token, {
         httpOnly: true,
         sameSite: "none",
-        secure: process.env.NODE_ENV === "production", 
+        secure: process.env.NODE_ENV === "production",
     })
 
     res.status(201).json({
@@ -52,10 +76,6 @@ async function registerUserController(req, res) {
         }
     })
 }
-
-
-
-
 async function loginUserController(req, res) {
     const { email, password } = req.body
 
@@ -88,7 +108,7 @@ async function loginUserController(req, res) {
     res.cookie("token", token, {
         httpOnly: true,
         sameSite: "none",
-        secure: process.env.NODE_ENV === "production", 
+        secure: process.env.NODE_ENV === "production",
     })
     res.status(200).json({
         message: "user logged in successfully",
@@ -101,7 +121,6 @@ async function loginUserController(req, res) {
     })
 
 }
-
 async function logoutUserController(req, res) {
     const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
 
@@ -114,13 +133,12 @@ async function logoutUserController(req, res) {
     res.clearCookie("token", {
         httpOnly: true,
         sameSite: "none",
-        secure: process.env.NODE_ENV === "production", 
+        secure: process.env.NODE_ENV === "production",
     })
     res.status(200).json({
         message: "user logged out successfully"
     })
 }
-
 async function getMeController(req, res) {
     const user = await userModel.findById(req.user.id)
 
@@ -133,7 +151,6 @@ async function getMeController(req, res) {
         }
     })
 }
-
 async function googleLoginController(req, res) {
     try {
         const idToken = req.body.credential || req.body.token || req.body.idToken
@@ -215,11 +232,137 @@ async function googleLoginController(req, res) {
         })
     }
 }
+async function githubLoginController(req, res) {
+    if (!process.env.GITHUB_CLIENT_ID) {
+        return res.status(500).json({
+            message: "GitHub client id is not configured"
+        })
+    }
+
+    const callbackUrl = process.env.GITHUB_CALLBACK_URL || "http://localhost:5000/api/auth/github/callback"
+    const params = new URLSearchParams({
+        client_id: process.env.GITHUB_CLIENT_ID,
+        redirect_uri: callbackUrl,
+        scope: "user:email",
+    })
+
+    res.redirect(`https://github.com/login/oauth/authorize?${params.toString()}`)
+}
+async function githubCallbackController(req, res) {
+    try {
+        const { code } = req.query
+
+        if (!code) {
+            return res.status(400).json({
+                message: "GitHub code is required"
+            })
+        }
+
+        if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET) {
+            return res.status(500).json({
+                message: "GitHub OAuth is not configured"
+            })
+        }
+
+        const callbackUrl = process.env.GITHUB_CALLBACK_URL || "http://localhost:5000/api/auth/github/callback"
+
+        const tokenResponse = await fetch("https://github.com/login/oauth/access_token", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                client_id: process.env.GITHUB_CLIENT_ID,
+                client_secret: process.env.GITHUB_CLIENT_SECRET,
+                code,
+                redirect_uri: callbackUrl,
+            }),
+        })
+        const tokenData = await tokenResponse.json()
+        const accessToken = tokenData.access_token
+
+        if (!accessToken) {
+            return res.status(401).json({
+                message: "GitHub login failed"
+            })
+        }
+
+        const githubHeaders = {
+            Authorization: `Bearer ${accessToken}`,
+            Accept: "application/vnd.github+json",
+        }
+
+        const userResponse = await fetch("https://api.github.com/user", {
+            headers: githubHeaders,
+        })
+
+        if (!userResponse.ok) {
+            return res.status(401).json({
+                message: "GitHub user details could not be fetched"
+            })
+        }
+
+        const githubUser = await userResponse.json()
+        const emailResponse = await fetch("https://api.github.com/user/emails", {
+            headers: githubHeaders,
+        })
+
+        if (!emailResponse.ok) {
+            return res.status(401).json({
+                message: "GitHub email could not be fetched"
+            })
+        }
+
+        const emails = await emailResponse.json()
+        const primaryEmail = Array.isArray(emails)
+            ? emails.find(email => email.primary && email.verified)?.email
+            : null
+
+        if (!githubUser.id || !primaryEmail) {
+            return res.status(401).json({
+                message: "GitHub account must have a verified primary email"
+            })
+        }
+
+        const githubId = String(githubUser.id)
+        let user = await userModel.findOne({
+            $or: [{ githubId }, { email: primaryEmail }]
+        })
+
+        if (!user) {
+            user = await userModel.create({
+                username: createProviderUsername(githubUser.login, primaryEmail, githubId, "githubuser"),
+                email: primaryEmail,
+                githubId,
+                picture: githubUser.avatar_url,
+                authProvider: "github",
+            })
+        } else if (!user.githubId) {
+            user.githubId = githubId
+            user.picture = user.picture || githubUser.avatar_url
+            user.authProvider = user.authProvider || "github"
+            await user.save()
+        }
+
+        const token = createAppToken(user)
+
+        setAuthCookie(res, token)
+        res.redirect(process.env.FRONTEND_URL || "http://localhost:5173")
+    } catch (error) {
+        return res.status(401).json({
+            message: "GitHub login failed"
+        })
+    }
+}
+
 
 module.exports = {
     registerUserController,
     loginUserController,
     logoutUserController,
     getMeController,
-    googleLoginController
+    googleLoginController,
+    githubLoginController,
+    githubCallbackController,
 }

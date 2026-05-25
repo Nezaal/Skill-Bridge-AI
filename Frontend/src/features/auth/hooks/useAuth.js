@@ -57,6 +57,10 @@ export const useAuth = () => {
             setLoading(false)
         }
     }
+    const handleGithubLogin = () => {
+        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? "https://skill-bridge-ai-production.up.railway.app" : "http://localhost:5000")
+        window.location.href = `${apiBaseUrl}/api/auth/github`
+    }
 
-    return { user, loading, handleRegister, handleLogin, handleLogout, handleGoogleLogin }
+    return { user, loading, handleRegister, handleLogin, handleLogout, handleGoogleLogin, handleGithubLogin }
 }
