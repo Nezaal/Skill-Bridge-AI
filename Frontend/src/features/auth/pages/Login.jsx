@@ -35,17 +35,23 @@ const Login = () => {
     }
 
     return (
-        <main className="login-wrapper">
-            {/* Ambient Animated Orbs */}
-            <div className="ambient-orb orb-1"></div>
-            <div className="ambient-orb orb-2"></div>
+        <main className="auth-shell">
+            <section className="auth-story" aria-label="SkillBridge AI">
+                <div className="auth-mark">SB</div>
+                <div>
+                    <p className="auth-kicker">SkillBridge AI</p>
+                    <h1>Interview practice that feels like focused work.</h1>
+                    <p className="auth-copy">
+                        Build sharper answers, review your gaps, and keep every report in one quiet workspace.
+                    </p>
+                </div>
+            </section>
 
-            <div className="login-glass-card">
-
+            <section className="auth-panel" aria-labelledby="login-title">
                 <div className="brand-header">
-                    <div className="brand-logo"></div>
-                    <h1>Welcome Back</h1>
-                    <p>Enter your credentials to access your account</p>
+                    <p className="auth-kicker">Welcome back</p>
+                    <h2 id="login-title">Sign in to continue</h2>
+                    <p>Use your account to open your interview workspace.</p>
                 </div>
 
                 <form onSubmit={handleSubmit}>
@@ -87,12 +93,11 @@ const Login = () => {
                         {loading ? 'Authenticating...' : 'Sign In'}
                     </button>
 
-                    {/* -------------------------------------------------------------------------------- */}
                     <div className="divider">
                         <span>or continue with</span>
                     </div>
 
-                    <div className="google-btn-wrapper" style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
+                    <div className="google-btn-wrapper">
                         <GoogleLogin
                             onSuccess={handleGoogleSuccess}
                             onError={() => {
@@ -114,9 +119,8 @@ const Login = () => {
                         <p>Don't have an account? <Link to={'/register'}>Register now</Link></p>
                     </div>
                 </form>
-            </div>
+            </section>
 
-            {/* Optional full-screen loading overlay */}
             {loading && (
                 <div className="loading-overlay">
                     <Loader text="Authenticating..." />

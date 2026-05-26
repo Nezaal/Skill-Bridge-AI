@@ -25,17 +25,23 @@ const Register = () => {
   }
 
   return (
-    <main className="login-wrapper">
-      {/* Ambient Animated Orbs */}
-      <div className="ambient-orb orb-1"></div>
-      <div className="ambient-orb orb-2"></div>
+    <main className="auth-shell">
+      <section className="auth-story" aria-label="SkillBridge AI">
+        <div className="auth-mark">SB</div>
+        <div>
+          <p className="auth-kicker">SkillBridge AI</p>
+          <h1>Turn interview prep into a repeatable system.</h1>
+          <p className="auth-copy">
+            Create reports, revisit feedback, and keep your practice history organized from the first session.
+          </p>
+        </div>
+      </section>
 
-      <div className="login-glass-card">
-
+      <section className="auth-panel" aria-labelledby="register-title">
         <div className="brand-header">
-          <div className="brand-logo"></div>
-          <h1>Create Account</h1>
-          <p>Enter your details below to get started</p>
+          <p className="auth-kicker">New account</p>
+          <h2 id="register-title">Create your workspace</h2>
+          <p>Set up your account and start your first interview report.</p>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -96,9 +102,8 @@ const Register = () => {
             <p>Already have an account? <Link to={'/login'}>Sign in</Link></p>
           </div>
         </form>
-      </div>
+      </section>
 
-      {/* Optional full-screen loading overlay */}
       {loading && (
         <div className="loading-overlay">
           <Loader text="Creating your account..." />

@@ -1,289 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600;6..72,700&display=swap');
+
+$paper: #f4f1ea;
+$ink: #20201d;
+$muted: #716d64;
+$line: #d8d0c4;
+$surface: #fffdf8;
+$surface-strong: #ffffff;
+$accent: #22543d;
+$accent-dark: #173c2b;
+$focus: rgba(34, 84, 61, 0.18);
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .home {
-  display: flex;
   min-height: 100vh;
   width: 100%;
-  padding: 3rem 5rem;
-  gap: 3rem;
-  /* Deep, slightly atmospheric dark background overriding base #000 if needed */
-  background: radial-gradient(ellipse at top left, rgba(45, 30, 80, 0.4) 0%, transparent 50%),
-              radial-gradient(ellipse at bottom right, rgba(20, 60, 100, 0.3) 0%, #050505 100%);
-  color: #e0e0e0;
-  font-family: 'Poppins', sans-serif;
+  padding: clamp(1.25rem, 4vw, 3rem);
+  background:
+    linear-gradient(90deg, rgba(32, 32, 29, 0.05) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(32, 32, 29, 0.04) 1px, transparent 1px),
+    $paper;
+  background-size: 44px 44px;
+  color: $ink;
+  font-family: 'Instrument Sans', sans-serif;
+}
 
-  /* Left Panel: Job Description */
-  .left {
-    flex: 1.2;
-    display: flex;
-    flex-direction: column;
-    padding: 3rem;
-    border-radius: 32px;
-    background: rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-color 0.5s ease;
-    position: relative;
-    overflow: hidden;
+.home-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 440px);
+  gap: clamp(1.5rem, 5vw, 4rem);
+  align-items: end;
+  max-width: 1320px;
+  margin: 0 auto 1.5rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid $line;
+  animation: pageIn 0.45s ease both;
 
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, #60a5fa, #c084fc, #f472b6);
-      opacity: 0.7;
-    }
-
-    &:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    textarea {
-      width: 100%;
-      height: 100%;
-      min-height: 500px;
-      background: transparent;
-      border: none;
-      color: #f8fafc;
-      font-size: 1.15rem;
-      font-family: 'Poppins', sans-serif;
-      line-height: 1.8;
-      font-weight: 300;
-      resize: none;
-      outline: none;
-
-      &::placeholder {
-        color: rgba(248, 250, 252, 0.25);
-        font-weight: 200;
-        letter-spacing: 0.5px;
-      }
-
-      &::-webkit-scrollbar {
-        width: 8px;
-      }
-      &::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      &::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 4px;
-      }
-      &::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.2);
-      }
-    }
+  h1 {
+    max-width: 760px;
+    margin: 0;
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    line-height: 0.9;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: $ink;
   }
 
-  /* Right Panel: Settings / Inputs */
-  .right {
-    flex: 0.8;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
+  > p {
+    margin: 0 0 0.35rem;
+    color: $muted;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+}
 
-    .input-group {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-      position: relative;
+.home-kicker,
+.step-label {
+  margin: 0;
+  color: $accent;
+  font-size: 0.76rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 
-      label {
-        font-size: 0.85rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        color: #94a3b8;
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
+.home-kicker {
+  margin-bottom: 0.85rem;
+}
 
-        &::before {
-          content: '';
-          display: inline-block;
-          width: 6px;
-          height: 6px;
-          background: #c084fc;
-          border-radius: 50%;
-          box-shadow: 0 0 12px 2px rgba(192, 132, 252, 0.5);
-          transition: all 0.3s ease;
-        }
-      }
+.interview-workbench {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(340px, 0.75fr);
+  gap: 1rem;
+  animation: pageIn 0.45s ease 0.08s both;
+}
 
-      &:hover label::before {
-        transform: scale(1.5);
-        box-shadow: 0 0 16px 4px rgba(192, 132, 252, 0.6);
-      }
+.job-section,
+.candidate-panel {
+  border: 1px solid $line;
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.94);
+  box-shadow: 0 24px 60px rgba(32, 32, 29, 0.07);
+}
 
-      input[type="file"] {
-        width: 100%;
-        padding: 1.2rem;
-        background: rgba(255, 255, 255, 0.02);
-        border: 2px dashed rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
-        color: #cbd5e1;
-        font-size: 0.95rem;
-        cursor: pointer;
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        backdrop-filter: blur(10px);
+.job-section {
+  min-height: min(66vh, 720px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
 
-        &::file-selector-button {
-          background: rgba(255, 255, 255, 0.05);
-          color: #fff;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          padding: 0.6rem 1.2rem;
-          border-radius: 12px;
-          font-weight: 500;
-          font-family: 'Poppins', sans-serif;
-          cursor: pointer;
-          margin-right: 1.5rem;
-          transition: all 0.3s ease;
-          backdrop-filter: blur(5px);
-        }
+.section-heading,
+.input-group > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
 
-        &:hover {
-          border-color: rgba(192, 132, 252, 0.4);
-          background: rgba(192, 132, 252, 0.03);
+  label {
+    color: $ink;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+}
 
-          &::file-selector-button {
-            background: #c084fc;
-            border-color: #c084fc;
-            box-shadow: 0 4px 12px rgba(192, 132, 252, 0.3);
-            color: #000;
-          }
-        }
-      }
+.section-heading {
+  padding: 1rem 1rem 0.85rem;
+  border-bottom: 1px solid $line;
+}
 
-      textarea {
-        width: 100%;
-        min-height: 200px;
-        padding: 1.5rem;
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        border-radius: 24px;
-        color: #f8fafc;
-        font-family: 'Poppins', sans-serif;
-        font-size: 1.05rem;
-        line-height: 1.7;
-        font-weight: 300;
-        resize: vertical;
-        outline: none;
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        backdrop-filter: blur(10px);
-        box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
+.job-section textarea,
+.input-group textarea {
+  width: 100%;
+  border: 0;
+  background: $surface;
+  color: $ink;
+  font: inherit;
+  line-height: 1.7;
+  resize: vertical;
 
-        &:focus {
-          border-color: rgba(96, 165, 250, 0.5);
-          background: rgba(255, 255, 255, 0.04);
-          box-shadow: 0 0 20px rgba(96, 165, 250, 0.15), inset 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
+  &::placeholder {
+    color: #a49e93;
+  }
 
-        &::placeholder {
-          color: rgba(248, 250, 252, 0.2);
-          font-weight: 200;
-        }
+  &:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 4px $focus;
+  }
+}
 
-        &::-webkit-scrollbar {
-          width: 6px;
-        }
-        &::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        &::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 3px;
-        }
-      }
-    }
+.job-section textarea {
+  flex: 1;
+  min-height: 520px;
+  padding: 1.25rem;
+  font-size: 1.02rem;
+}
 
-    .generate-btn {
-      margin-top: auto;
-      padding: 1.4rem 2rem;
-      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #d946ef 100%);
-      background-size: 200% 200%;
-      color: #ffffff;
-      border: none;
-      border-radius: 20px;
-      font-size: 1.15rem;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      letter-spacing: 1px;
+.candidate-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1rem;
+  border: 1px solid $line;
+  border-radius: 8px;
+  background: $surface-strong;
+}
+
+.upload-group {
+  input[type="file"] {
+    width: 100%;
+    min-height: 54px;
+    padding: 0.7rem;
+    border: 1px dashed #b8aea1;
+    border-radius: 6px;
+    background: #fbf8f1;
+    color: $muted;
+    font: inherit;
+    cursor: pointer;
+
+    &::file-selector-button {
+      margin-right: 0.9rem;
+      padding: 0.62rem 0.85rem;
+      border: 1px solid $line;
+      border-radius: 6px;
+      background: $surface-strong;
+      color: $ink;
+      font: inherit;
+      font-weight: 700;
       cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 12px 30px -8px rgba(139, 92, 246, 0.6);
+      transition: background 0.16s ease, border-color 0.16s ease;
+    }
 
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-        transition: all 0.6s ease;
-      }
-
-      &:hover {
-        transform: translateY(-5px);
-        background-position: 100% 50%;
-        box-shadow: 0 20px 40px -10px rgba(217, 70, 239, 0.6);
-
-        &::before {
-          left: 100%;
-        }
-      }
-
-      &:active {
-        transform: translateY(2px);
-        box-shadow: 0 8px 20px -8px rgba(139, 92, 246, 0.6);
-      }
+    &:hover::file-selector-button {
+      border-color: $accent;
+      background: #eef5ef;
     }
   }
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.input-group textarea {
+  min-height: 250px;
+  padding: 1rem;
+  border: 1px solid $line;
+  border-radius: 6px;
+  background: #fffefa;
 }
 
-.home .left {
-  animation: fadeIn 0.8s ease backwards;
+.generate-btn {
+  width: 100%;
+  min-height: 54px;
+  margin-top: auto;
+  border: 1px solid $accent;
+  border-radius: 6px;
+  background: $accent;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    background: $accent-dark;
+    box-shadow: 0 10px 22px rgba(34, 84, 61, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 }
 
-.home .right .input-group:nth-child(1) {
-  animation: fadeIn 0.8s ease 0.2s backwards;
+@media (max-width: 980px) {
+  .home-header,
+  .interview-workbench {
+    grid-template-columns: 1fr;
+  }
+
+  .home-header {
+    align-items: start;
+  }
+
+  .job-section {
+    min-height: auto;
+  }
+
+  .job-section textarea {
+    min-height: 360px;
+  }
 }
 
-.home .right .input-group:nth-child(2) {
-  animation: fadeIn 0.8s ease 0.4s backwards;
-}
-
-.home .right .generate-btn {
-  animation: fadeIn 0.8s ease 0.6s backwards;
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
+@media (max-width: 620px) {
   .home {
+    padding: 1rem;
+  }
+
+  .section-heading,
+  .input-group > div {
+    align-items: flex-start;
     flex-direction: column;
-    padding: 2rem;
+    gap: 0.35rem;
+  }
 
-    .left, .right {
-      flex: none;
-      width: 100%;
-    }
-
-    .left {
-      textarea {
-        min-height: 300px;
-      }
-    }
+  .candidate-panel,
+  .input-group {
+    padding: 0.85rem;
   }
 }
