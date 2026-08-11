@@ -1,6 +1,5 @@
 import axios from "axios"
 
-console.log(import.meta.env.VITE_API_BASE_URL)
 const api = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? "https://skill-bridge-ai-production.up.railway.app" : "http://localhost:5000"),
     withCredentials: true
