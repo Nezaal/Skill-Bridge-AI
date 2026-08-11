@@ -402,10 +402,10 @@ const Interview = () => {
                 await downloadResumePdf(interviewId, data.title)
                 setResumeGenerating(false)
               }}
-              disabled={resumeGenerating}
+              disabled={resumeGenerating || data.resumePdfStatus === 'pending'}
             >
-              <span className="interview__download-icon">{resumeGenerating ? '⏳' : '↓'}</span>
-              {resumeGenerating ? 'Generating Resume...' : 'Download Resume'}
+              <span className="interview__download-icon">{resumeGenerating || data.resumePdfStatus === 'pending' ? '⏳' : '↓'}</span>
+              {resumeGenerating ? 'Generating Resume...' : data.resumePdfStatus === 'pending' ? 'Preparing Resume...' : 'Download Resume'}
             </button>
           </div>
         </div>

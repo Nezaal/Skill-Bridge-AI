@@ -115,6 +115,11 @@ const interviewReportSchema = new mongoose.Schema({
         min: 0,
         max: 100,
     },
+    missingSkills: {
+        type: [String],
+        default: []
+    },
+
     technicalQuestions: [technicalQuestionSchema],
 
     behaviourQuestions: [behaviourQuestionSchema],
@@ -122,6 +127,18 @@ const interviewReportSchema = new mongoose.Schema({
     skillGaps: [skillGapSchema],
 
     preparationPlan: [preparationPlanSchema],
+
+    resumeHTML: {
+        type: String,
+    },
+    resumePDF: {
+        type: Buffer,
+    },
+    resumePdfStatus: {
+        type: String,
+        enum: ["none", "pending", "ready", "failed"],
+        default: "none",
+    },
 
     user: {
         type: mongoose.Schema.Types.ObjectId,
