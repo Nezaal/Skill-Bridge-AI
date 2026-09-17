@@ -3,6 +3,32 @@ const { GoogleGenAI, Type } = require("@google/genai");
 const ai = new GoogleGenAI({
     apiKey: process.env.GOOGLE_API_KEY
 });
+const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+
+async function generateContentWithRetry(contents, config) {
+    const maxAttempts = 3;
+
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+        try {
+            return await ai.models.generateContent({
+                model: GEMINI_MODEL,
+                contents,
+                config,
+            });
+        } catch (error) {
+            const status = error.status || error.code;
+            const retryable = [429, 500, 502, 503, 504].includes(Number(status));
+
+            if (!retryable || attempt === maxAttempts) {
+                throw error;
+            }
+
+            const delayMs = 1000 * (2 ** (attempt - 1));
+            console.warn(`Gemini request failed (${status}); retrying in ${delayMs}ms...`);
+            await new Promise(resolve => setTimeout(resolve, delayMs));
+        }
+    }
+}
 
 const interviewReportSchema = {
     type: Type.OBJECT,
@@ -78,13 +104,9 @@ async function generateInterviewReport({ resume, selfDescription, jobDescription
     jobDescription : ${jobDescription}
     `
 
-    const response = await ai.models.generateContent({
-        model: "gemini-flash-latest",
-        contents: prompt,
-        config: {
-            responseMimeType: "application/json",
-            responseSchema: interviewReportSchema,
-        },
+    const response = await generateContentWithRetry(prompt, {
+        responseMimeType: "application/json",
+        responseSchema: interviewReportSchema,
     });
 
     const result = JSON.parse(response.text)
@@ -150,13 +172,9 @@ ${selfDescription}
 ${jobDescription}
 `
 
-    const response = await ai.models.generateContent({
-        model: "gemini-flash-latest",
-        contents: prompt,
-        config: {
-            responseMimeType: "application/json",
-            responseSchema: resumeHTMLSchema,
-        },
+    const response = await generateContentWithRetry(prompt, {
+        responseMimeType: "application/json",
+        responseSchema: resumeHTMLSchema,
     });
 
     const result = JSON.parse(response.text)
